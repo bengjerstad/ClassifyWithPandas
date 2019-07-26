@@ -76,3 +76,12 @@ print("Classifier accuracy percent:",(nltk.classify.accuracy(bayesclassifier, te
 dtclassifer = nltk.DecisionTreeClassifier.train(train_set)
 dtclassifer.show_most_informative_features(200)
 print("Classifier accuracy percent:",(nltk.classify.accuracy(dtclassifer, testing_set))*100)
+
+#Saved Modules for later
+import pickle
+save_classifier = open("naivebayes.pickle","wb")
+pickle.dump(bayesclassifier, save_classifier)
+save_classifier.close()
+save_classifier = open("dt.pickle","wb")
+pickle.dump(dtclassifer, save_classifier)
+save_classifier.close()
