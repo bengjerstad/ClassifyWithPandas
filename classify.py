@@ -70,7 +70,7 @@ testing_set = featuresets[:1900]
 #NaiveBayesClassifier
 bayesclassifier = nltk.NaiveBayesClassifier.train(train_set)
 bayesclassifier.show_most_informative_features(200)
-print("Classifier accuracy percent:",(nltk.bayesclassifier.accuracy(classifier, testing_set))*100)
+print("Classifier accuracy percent:",(nltk.classify.accuracy(bayesclassifier, testing_set))*100)
 
 #DecisionTreeClassifier
 dtclassifer = nltk.DecisionTreeClassifier.train(train_set)
