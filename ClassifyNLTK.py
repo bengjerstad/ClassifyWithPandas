@@ -8,36 +8,8 @@ df = pd.read_excel('Data.xls',sheet_name="Data")
 #drop any row that is missing the target col
 df = df.dropna(how='any',subset=['Type'])
 
-#Might need to drop any other rows that you don't want to include or modify some of the catigories from the orignal
-#or you can ignore if the orginal data is good to go
-#
-#TypeTranslation = pd.read_excel('Data.xls',sheet_name="DataTranslation",index_col="Name")
-#TranslationLookUp = TypeTranslation['Action'].to_dict()
-#def Translate(x):
-#    CurrentType = x['Type']
-#    if CurrentType in list(TranslationLookUp.keys()):
-#        x['Type'] = TranslationLookUp[CurrentType]
-#    if x['Type'] != 'Drop' and type(x['Summary']) == type(""):
-#        return x
-#
-#df = df.apply(Translate,axis=1).dropna(how='all')
-#print(len(df))
-
-#some cleanup
-def cleanup(x):
-    x = x.lower()
-    x = x.replace('can\'t','cant')
-    x = x.replace('&','and')
-    x = x.replace('re:','')
-    x = x.replace('fw:','')
-    #FixDates
-    x = re.sub(r'[0-9]?[0-9]\/[0-9]?[0-9]\/20[1-2][0-9]', '[date]', x)
-    x = re.sub(r'[0-9]?[0-9]\/[0-9]?[0-9]\/[1-2][0-9]', '[date]', x)
-    x = re.sub(r'[0-9]?[0-9]-[0-9]?[0-9]-20[1-2][0-9]', '[date]', x)
-    x = re.sub(r'[0-9]?[0-9]-[0-9]?[0-9]-[1-2][0-9]', '[date]', x)
-    return x
- 
-df['SummaryClean'] = df.Summary.apply(cleanup)
+#Do some Cleanup here
+#See CleanUp.py
 
 #Tokenize:
 df['SummaryToken'] = df.SummaryClean.apply(nltk.word_tokenize)
