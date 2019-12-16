@@ -58,9 +58,7 @@ def find_features(x):
 df['Features'] = df.SummaryToken.apply(find_features)
 
 #Create featuresets from each row:
-featuresets = []
-for index, row in df.iterrows():
-    featuresets.append((row['Features'], row['Type']))
+featuresets = df[['Features','TYPE']].to_numpy()
 shuffle(featuresets)
  
 #Split into test groups
